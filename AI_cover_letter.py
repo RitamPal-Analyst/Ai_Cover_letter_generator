@@ -4,7 +4,7 @@ import google.genai as genai
 
 #genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 client = genai.Client(api_key="GOOGLE_API_KEY")
-model = genai.GenerativeModel('gemini-2.5-flash')
+#model = genai.GenerativeModel('gemini-2.5-flash')
 
 #1. AI Cover Letter Generator
 #Create a Streamlit app that:
@@ -22,5 +22,6 @@ summary= st.text_input("Enter Resume Summary:")
 
 if st.button("Generate Cover Letter"):
     prompt = f"Write a cover letter for {Job_title} using these resume points: {summary}"
-    response = model.generate_content(prompt)
+    #response = model.generate_content(prompt)
+    response = client.models.generate_content(model="gemini-3.5-flash",contents= prompt)
     st.write(response.text)
